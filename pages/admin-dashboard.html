@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/admin-dashboard.css">
+</head>
+<body>
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <nav>
+    <div class="nav-brand"><span class="nav-star">&#9733;</span> Bigg Boss <span class="nav-sub">ADMIN</span></div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-badge">&#128737; Admin Portal</div>
+    <h1>Welcome, Admin</h1>
+    <p>Manage contestants and monitor voting results from your dashboard.</p>
+  </div>
+
+  <div class="dashboard">
+    <a href="admin-add-contestant.html" class="card">
+      <div class="card-icon">&#43;</div>
+      <div class="card-body"><h2>Add Contestant</h2><p>Register new contestants to the voting pool.</p></div>
+      <span class="card-arrow">&#8594;</span>
+    </a>
+    <a href="admin-results.html" class="card">
+      <div class="card-icon">&#128202;</div>
+      <div class="card-body"><h2>See Results</h2><p>View live vote counts and contestant standings.</p></div>
+      <span class="card-arrow">&#8594;</span>
+    </a>
+  </div>
+
+  <!-- Logout Modal -->
+  <div id="logout-modal">
+    <div class="logout-box">
+      <div class="logout-icon">&#128274;</div>
+      <h2>Logout?</h2>
+      <p>Are you sure you want to logout from the admin panel?</p>
+      <div class="logout-actions">
+        <button class="btn-cancel" id="logout-cancel">Cancel</button>
+        <button class="btn-confirm" id="logout-confirm">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>initLogout('../index.html');</script>
+</body>
+</html>

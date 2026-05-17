@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/results.css">
+</head>
+<body>
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <nav>
+    <div class="nav-brand"><span class="nav-star">&#9733;</span> Bigg Boss <span class="nav-sub">VOTING ZONE</span></div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul>
+      <li><a href="voting.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Not published -->
+  <div id="pending" class="pending" style="display:none">
+    <span class="pending-icon">&#9203;</span>
+    <h1>Results Not Announced Yet</h1>
+    <p>The admin hasn't published the results yet. Please check back later.</p>
+    <a href="voting.html" class="btn-ghost">&#8592; Back to Voting</a>
+  </div>
+
+  <!-- Published -->
+  <div id="published" style="display:none">
+
+    <div class="results-banner">
+      <div class="hero-badge">&#127942; Official Results</div>
+      <h1>Grand Finale Results</h1>
+      <p>Official vote standings announced by the admin.</p>
+      <div class="result-stats">
+        <div class="r-stat"><span id="total-votes">0</span><label>Total Votes</label></div>
+        <div class="r-stat"><span id="winner-name">—</span><label>Winner</label></div>
+        <div class="r-stat"><span id="winner-pct">0%</span><label>Top Vote %</label></div>
+      </div>
+    </div>
+
+    <!-- Podium -->
+    <div class="podium-wrap">
+      <h2>&#127942; Top 3 Contestants</h2>
+      <div class="podium" id="podium"></div>
+    </div>
+
+    <!-- Full Rankings -->
+    <div class="rankings-wrap">
+      <h2>&#128202; Full Rankings</h2>
+      <div id="rankings"></div>
+    </div>
+
+    <div class="result-actions">
+      <a href="voting.html" class="btn-ghost">&#8592; Back to Voting</a>
+    </div>
+
+  </div>
+
+  <div id="logout-modal">
+    <div class="logout-box">
+      <div class="logout-icon">&#128274;</div>
+      <h2>Logout?</h2>
+      <p>Are you sure you want to logout?</p>
+      <div class="logout-actions">
+        <button class="btn-cancel" id="logout-cancel">Cancel</button>
+        <button class="btn-confirm" id="logout-confirm">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    const photos = {
+      'Shalin Bhanot':     'https://pbs.twimg.com/media/FkkhnEyXEAMDnlh.jpg:large',
+      'Mc Stan':           'https://pbs.twimg.com/media/Fe24ML3aMAE5Eqw.jpg',
+      'Shiv Thakare':      'https://pbs.twimg.com/media/FjSWxB_WQAAL2rx.jpg:large',
+      'Priyanka Choudhary':'https://pbs.twimg.com/media/FkkhY4tXEAAWHR7.jpg',
+      'Archana Gautam':    'https://pbs.twimg.com/media/FlDKlmqWYAAF2Ni.jpg:large'
+    };
+    const medals = ['🥇','🥈','🥉'];
+    const podiumClass = ['first','second','third'];
+
+    if (localStorage.getItem('resultsPublished') !== 'true') {
+      document.getElementById('pending').style.display = 'flex';
+    } else {
+      document.getElementById('published').style.display = 'block';
+
+      const votes  = JSON.parse(localStorage.getItem('votes')) || {};
+      const total  = Object.values(votes).reduce((a, b) => a + b, 0) || 1;
+      const sorted = Object.entries(votes)
+        .map(([name, count]) => ({ name, count, pct: Math.round((count / total) * 100) }))
+        .sort((a, b) => b.count - a.count);
+
+      // Stats
+      document.getElementById('total-votes').textContent = total;
+      if (sorted[0]) {
+        document.getElementById('winner-name').textContent = sorted[0].name.split(' ')[0];
+        document.getElementById('winner-pct').textContent  = sorted[0].pct + '%';
+      }
+
+      // Podium (top 3)
+      document.getElementById('podium').innerHTML = sorted.slice(0, 3).map((c, i) => `
+        <div class="podium-card ${podiumClass[i]}">
+          <div class="podium-medal">${medals[i]}</div>
+          <img src="${photos[c.name] || ''}" alt="${c.name}">
+          <h3>${c.name}</h3>
+          <div class="podium-pct">${c.pct}%</div>
+          <div class="podium-votes">${c.count} votes</div>
+        </div>`).join('');
+
+      // Full rankings
+      document.getElementById('rankings').innerHTML = sorted.map((c, i) => `
+        <div class="rank-row ${i === 0 ? 'top' : ''}">
+          <div class="rank-num">${i + 1}</div>
+          <img src="${photos[c.name] || ''}" alt="${c.name}">
+          <div class="rank-info">
+            <h3>${c.name}</h3>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:${c.pct}%"></div></div>
+          </div>
+          <div class="rank-right">
+            <span class="rank-pct">${c.pct}%</span>
+            <span class="rank-votes">${c.count} votes</span>
+          </div>
+        </div>`).join('');
+    }
+
+    initLogout('../index.html');
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/membership.css">
+</head>
+<body>
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <nav>
+    <div class="nav-brand"><span class="nav-star">&#9733;</span> Bigg Boss <span class="nav-sub">VOTING ZONE</span></div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul>
+      <li><a href="voting.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <h1>Membership Plans</h1>
+    <p>Choose a plan that gives you the best voting experience.</p>
+  </div>
+
+  <div class="plans">
+    <div class="plan-card">
+      <div class="plan-header"><span class="plan-icon">&#127775;</span><h2>Free</h2><div class="plan-price">&#8377;0 <span>/ month</span></div></div>
+      <ul class="plan-features">
+        <li>&#10003; 1 vote per round</li><li>&#10003; View live results</li><li>&#10003; Contestant profiles</li>
+        <li class="disabled">&#10007; Priority voting</li><li class="disabled">&#10007; Exclusive updates</li><li class="disabled">&#10007; Ad-free experience</li>
+      </ul>
+      <button onclick="join('Free')">Get Started</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-header"><span class="plan-icon">&#9733;</span><h2>Pro</h2><div class="plan-price">&#8377;99 <span>/ month</span></div></div>
+      <ul class="plan-features">
+        <li>&#10003; 5 votes per round</li><li>&#10003; View live results</li><li>&#10003; Contestant profiles</li>
+        <li>&#10003; Priority voting</li><li>&#10003; Exclusive updates</li><li class="disabled">&#10007; Ad-free experience</li>
+      </ul>
+      <button onclick="join('Pro')">Join Pro</button>
+    </div>
+    <div class="plan-card">
+      <div class="plan-header"><span class="plan-icon">&#128081;</span><h2>Elite</h2><div class="plan-price">&#8377;199 <span>/ month</span></div></div>
+      <ul class="plan-features">
+        <li>&#10003; Unlimited votes</li><li>&#10003; View live results</li><li>&#10003; Contestant profiles</li>
+        <li>&#10003; Priority voting</li><li>&#10003; Exclusive updates</li><li>&#10003; Ad-free experience</li>
+      </ul>
+      <button onclick="join('Elite')">Join Elite</button>
+    </div>
+  </div>
+
+  <div id="logout-modal">
+    <div class="logout-box">
+      <div class="logout-icon">&#128274;</div>
+      <h2>Logout?</h2>
+      <p>Are you sure you want to logout?</p>
+      <div class="logout-actions">
+        <button class="btn-cancel" id="logout-cancel">Cancel</button>
+        <button class="btn-confirm" id="logout-confirm">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    function join(plan) { showToast('You selected the ' + plan + ' plan! Redirecting to payment...', 'info'); }
+    initLogout('../index.html');
+  </script>
+</body>
+</html>

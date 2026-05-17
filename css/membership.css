@@ -1,0 +1,23 @@
+.plans { display: flex; justify-content: center; align-items: stretch; gap: 24px; padding: 50px 40px 70px; flex-wrap: wrap; }
+
+.plan-card { position: relative; background: rgba(10,10,10,0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 36px 30px; width: 280px; display: flex; flex-direction: column; gap: 24px; backdrop-filter: blur(10px); transition: border-color 0.2s, transform 0.2s; }
+.plan-card:hover { transform: translateY(-4px); border-color: rgba(232,42,42,0.4); }
+.plan-card.featured { border-color: #e82a2a; background: rgba(232,42,42,0.08); transform: scale(1.04); }
+.plan-card.featured:hover { transform: scale(1.04) translateY(-4px); }
+
+.popular-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: #e82a2a; color: white; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 16px; border-radius: 20px; white-space: nowrap; }
+
+.plan-header { text-align: center; }
+.plan-icon { font-size: 36px; display: block; margin-bottom: 10px; }
+.plan-header h2 { font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px; }
+.plan-price { font-size: 32px; font-weight: 700; color: #e82a2a; }
+.plan-price span { font-size: 14px; font-weight: 400; color: rgba(255,255,255,0.4); }
+
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.plan-features li { font-size: 14px; color: rgba(255,255,255,0.75); }
+.plan-features li.disabled { color: rgba(255,255,255,0.25); text-decoration: line-through; }
+
+.plan-card button { width: 100%; padding: 13px; background: #e82a2a; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: background 0.2s; }
+.plan-card button:hover { background: #c0201f; }
+.plan-card:not(.featured) button { background: transparent; border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+.plan-card:not(.featured) button:hover { border-color: #e82a2a; color: white; background: rgba(232,42,42,0.1); }

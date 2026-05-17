@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&family=Poppins:wght@300;400;600;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url(https://c4.wallpaperflare.com/wallpaper/748/433/119/simple-minimalism-gradient-abstract-wallpaper-preview.jpg) no-repeat center center / cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: whitesmoke;
+}
+
+/* ── Loader ── */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #0a0a0a;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+#loader.hide { opacity: 0; visibility: hidden; }
+#loader .loader-icon { font-size: 72px; color: #e82a2a; text-shadow: 0 0 30px rgba(232,42,42,0.8); animation: pulse 1.2s ease-in-out infinite; }
+#loader h1 { font-family: 'Bruno Ace', cursive; font-size: 32px; color: white; letter-spacing: 3px; }
+#loader span { font-size: 12px; letter-spacing: 6px; color: #e82a2a; text-transform: uppercase; }
+#loader .loader-bar { width: 200px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; margin-top: 10px; }
+#loader .loader-bar-fill { height: 100%; width: 0; background: #e82a2a; border-radius: 3px; animation: loadBar 1.5s ease forwards; }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes loadBar { to { width: 100%; } }
+
+/* ── Toast ── */
+#toast-container {
+  position: fixed; bottom: 30px; right: 30px;
+  display: flex; flex-direction: column; gap: 10px;
+  z-index: 9998;
+}
+.toast {
+  display: flex; align-items: center; gap: 12px;
+  background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 14px 18px;
+  font-size: 14px; color: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: slideIn 0.3s ease;
+  min-width: 280px; max-width: 360px;
+}
+.toast.success { border-left: 4px solid #22c55e; }
+.toast.error   { border-left: 4px solid #e82a2a; }
+.toast.info    { border-left: 4px solid #3b82f6; }
+.toast-icon { font-size: 18px; flex-shrink: 0; }
+.toast.fadeout { animation: slideOut 0.3s ease forwards; }
+@keyframes slideIn  { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(120%); opacity: 0; } }
+
+/* ── Logout Confirm Modal ── */
+#logout-modal {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(6px);
+  z-index: 500; align-items: center; justify-content: center;
+}
+#logout-modal.show { display: flex; }
+.logout-box {
+  background: #111; border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px; padding: 36px; width: 100%; max-width: 380px;
+  text-align: center; display: flex; flex-direction: column; gap: 16px;
+}
+.logout-box .logout-icon { font-size: 48px; }
+.logout-box h2 { font-size: 20px; font-weight: 700; color: white; }
+.logout-box p  { font-size: 14px; color: rgba(255,255,255,0.5); }
+.logout-box .logout-actions { display: flex; gap: 12px; margin-top: 8px; }
+.logout-box .logout-actions button { flex: 1; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s; border: none; }
+.logout-box .btn-confirm { background: #e82a2a; color: white; }
+.logout-box .btn-confirm:hover { background: #c0201f; }
+.logout-box .btn-cancel  { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 1.5px solid rgba(255,255,255,0.15) !important; }
+.logout-box .btn-cancel:hover { background: rgba(255,255,255,0.15); color: white; }
+
+/* ── Navbar ── */
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 64px;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-brand { font-family: 'Bruno Ace', cursive; font-size: 18px; color: white; letter-spacing: 2px; }
+.nav-star  { color: #e82a2a; text-shadow: 0 0 10px rgba(232,42,42,0.6); }
+.nav-sub   { font-size: 11px; letter-spacing: 4px; color: #e82a2a; margin-left: 4px; }
+
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+
+nav ul { list-style: none; display: flex; align-items: center; gap: 28px; }
+nav ul a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s; }
+nav ul a:hover { color: white; }
+
+.logout-btn { background: rgba(232,42,42,0.15); border: 1px solid rgba(232,42,42,0.4); color: #e82a2a !important; padding: 6px 16px; border-radius: 20px; cursor: pointer; }
+.logout-btn:hover { background: #e82a2a !important; color: white !important; }
+
+/* ── Split Layout ── */
+body.split { height: 100vh; overflow: hidden; }
+.split-container { display: flex; height: 100vh; }
+.split-left  { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.55); padding: 50px 40px; text-align: center; }
+.split-right { flex: 1; display: flex; align-items: center; justify-content: center; background: rgba(10,10,10,0.75); padding: 40px 30px; overflow-y: auto; }
+
+/* ── Logo ── */
+.logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+.logo-icon { font-size: 64px; color: #e82a2a; line-height: 1; text-shadow: 0 0 20px rgba(232,42,42,0.7); }
+.logo h1   { font-family: 'Bruno Ace', cursive; font-size: 42px; color: white; letter-spacing: 3px; margin: 8px 0 4px; }
+.logo-sub  { font-size: 13px; letter-spacing: 6px; color: #e82a2a; font-weight: 600; text-transform: uppercase; }
+.detail    { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.8; max-width: 380px; }
+
+/* ── Form ── */
+.form-title { font-size: 28px; font-weight: 700; color: white; }
+.form-sub   { font-size: 14px; color: rgba(255,255,255,0.5); }
+
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-group label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.5px; }
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  width: 100%; padding: 13px 16px; border-radius: 8px;
+  border: 1.5px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.07);
+  color: white; font-size: 14px; font-family: 'Poppins', sans-serif;
+  outline: none; transition: border 0.2s; resize: vertical;
+}
+input:focus, textarea:focus { border-color: #e82a2a; }
+input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); }
+
+.btn-primary {
+  width: 100%; padding: 13px; background: #e82a2a; color: white; border: none;
+  border-radius: 8px; font-size: 15px; font-weight: 600; font-family: 'Poppins', sans-serif;
+  cursor: pointer; transition: background 0.2s; text-decoration: none; text-align: center; display: block;
+}
+.btn-primary:hover { background: #c0201f; }
+
+.btn-ghost {
+  padding: 12px 24px; background: transparent; color: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; text-decoration: none;
+  font-size: 14px; font-weight: 600; transition: all 0.2s; display: inline-block;
+}
+.btn-ghost:hover { border-color: white; color: white; }
+
+.back-btn { display: block; text-align: center; font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.back-btn:hover { color: white; }
+
+.register { font-size: 13px; color: rgba(255,255,255,0.55); text-align: center; }
+.register a { color: #e82a2a; text-decoration: none; font-weight: 600; }
+.register a:hover { text-decoration: underline; }
+
+/* ── Hero ── */
+.hero { text-align: center; padding: 60px 20px 40px; background: rgba(0,0,0,0.45); }
+.hero-badge { display: inline-block; background: rgba(232,42,42,0.15); border: 1px solid rgba(232,42,42,0.4); color: #e82a2a; font-size: 12px; font-weight: 600; letter-spacing: 1px; padding: 5px 16px; border-radius: 20px; text-transform: uppercase; margin-bottom: 16px; }
+.hero h1 { font-family: 'Bruno Ace', cursive; font-size: 40px; color: white; letter-spacing: 2px; margin-bottom: 10px; }
+.hero p  { font-size: 15px; color: rgba(255,255,255,0.6); }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+  /* Navbar */
+  nav { padding: 0 20px; }
+  .nav-toggle { display: flex; }
+  nav ul {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 64px; left: 0; right: 0;
+    background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 0;
+  }
+  nav ul.open { display: flex; }
+  nav ul li { width: 100%; }
+  nav ul a { display: block; padding: 12px 24px; font-size: 14px; }
+  .logout-btn { margin: 8px 24px; display: inline-block; }
+
+  /* Split layout stacks vertically */
+  body.split { height: auto; overflow: auto; }
+  .split-container { flex-direction: column; height: auto; min-height: 100vh; }
+  .split-left  { padding: 40px 24px 30px; flex: none; }
+  .split-right { padding: 30px 24px 40px; flex: none; }
+  .logo h1     { font-size: 30px; }
+  .logo-icon   { font-size: 48px; }
+  .detail      { font-size: 14px; }
+
+  /* Hero */
+  .hero { padding: 40px 20px 30px; }
+  .hero h1 { font-size: 28px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 22px; }
+  .logo h1 { font-size: 24px; }
+  #toast-container { bottom: 16px; right: 16px; left: 16px; }
+  .toast { min-width: unset; }
+}

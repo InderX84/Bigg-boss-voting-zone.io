@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="split">
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <div class="split-container">
+    <div class="split-left">
+      <div class="logo"><span class="logo-icon">&#9733;</span><h1>Bigg Boss</h1><span class="logo-sub">VOTING ZONE</span></div>
+      <p class="detail">Admin access only. Manage contestants, votes, and results from the <strong>Voting Zone</strong> control panel.</p>
+    </div>
+    <div class="split-right">
+      <form class="login-form" onsubmit="login(event)">
+        <div class="admin-badge">&#128737; Admin Portal</div>
+        <h2 class="form-title">Admin Login</h2>
+        <p class="form-sub">Sign in with your admin credentials</p>
+        <div class="input-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="Enter your email" required /></div>
+        <div class="input-group"><label for="pswrd">Password</label><input type="password" id="pswrd" placeholder="Enter your password" required /></div>
+        <div class="subcontainer">
+          <label class="remember"><input type="checkbox" checked /> Remember me</label>
+          <a class="forgot-link" href="forgot-password.html">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+        <p class="register">Back to user login? <a href="../index.html">Click here!</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    const ADMIN_EMAIL = 'admin@biggboss.com';
+    const ADMIN_PASS  = 'admin123';
+
+    function login(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value.toLowerCase();
+      const pwd   = document.getElementById('pswrd').value;
+      if (email === ADMIN_EMAIL && pwd === ADMIN_PASS) {
+        showToast('Welcome, Admin! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'admin-dashboard.html', 1000);
+      } else {
+        showToast('Invalid admin credentials.', 'error');
+      }
+    }
+  </script>
+</body>
+</html>

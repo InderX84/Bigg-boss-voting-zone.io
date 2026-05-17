@@ -1,103 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login page</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bigg Boss Voting Zone</title>
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/auth.css">
 </head>
-<body>
-    <div class="container">
-        <marquee behavior="scroll" bgcolor="e82a2a" scrollamount="8"><h1>********** Voting Zone **********</h1></marquee
+<body class="split">
 
-        <div class="png">
-            <img src="https://i.postimg.cc/3r0TsHgz/pngwing-com.png" alt="Logo" height="510">
-        </div>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-icon">&#9733;</div>
+    <h1>Bigg Boss</h1>
+    <span>VOTING ZONE</span>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  </div>
 
-        <form role="form" onsubmit="signIn(event);" autocomplete="off">
-
-            <div class="detail">
-                <p>
-                    A <strong>Voting Zone</strong> also known as internet voting or e-voting, is a method of casting and submitting votes in an platform through electronic means, typically using the internet. It allows eligible voters to participate in the voting process from the comfort of their own devices, such as computers, smartphones, or tablets, rather than physically visiting a polling station.
-                </p>
-            </div>
-
-            <div class="conta">
-
-                <fieldset class="field">
-                    <legend>
-                        <h3> Sign In </h3>
-                    </legend>
-
-                    <div class="mainContainer">
-                        <!-- Username -->
-                        <label for="email">Username</label>
-                        <input type="email" id="email" placeholder="Enter your E-mail" name="email" />
-
-                        <!-- Password -->
-                        <label for="pwd">Password</label>
-                        <input type="password" id="pwd" placeholder="Enter your Password" name="pwd" />
-
-                        <div class="subcontainer">
-                            <label>
-                                <input type="checkbox" checked="checked" name="remember" />
-                                Remember me
-                            </label>
-                            <p class="forgotpsd">
-                                <a href="/forgot-pswd/forgot.html">Forgot Password?</a>
-                            </p>
-                        </div>
-
-                        <!-- Submit button -->
-                        <button type="submit">Login</button>
-                        <button type="reset">Reset</button>
-
-                        <!-- Sign up link -->
-                        <p class="register">
-                            Not a member? <a href="/signup/signup.html">Register here!</a>
-                        </p>
-                        <br>
-                        <p class="register">
-                            Admin Login <a href="/admin-login/a-login.html">click here!</a>
-                        </p>
-                    </div>
-                </fieldset>
-            </div>
-        </form>
+  <div class="split-container">
+    <div class="split-left">
+      <div class="logo">
+        <span class="logo-icon">&#9733;</span>
+        <h1>Bigg Boss</h1>
+        <span class="logo-sub">VOTING ZONE</span>
+      </div>
+      <p class="detail">Cast your vote for your favourite contestant. A <strong>Voting Zone</strong> allows eligible voters to participate through electronic means from the comfort of their own devices.</p>
     </div>
-
-<footer>
-    <div class="footer">
-        <p>&copy; <a href="#">Bigg Boss Voting Zone</a></p>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
+    <div class="split-right">
+      <form class="login-form" role="form" onsubmit="signIn(event)" autocomplete="off">
+        <h2 class="form-title">Welcome Back</h2>
+        <p class="form-sub">Sign in to continue voting</p>
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" name="email" required />
         </div>
+        <div class="input-group">
+          <label for="pwd">Password</label>
+          <input type="password" id="pwd" placeholder="Enter your password" name="pwd" required />
+        </div>
+        <div class="subcontainer">
+          <label class="remember"><input type="checkbox" checked name="remember" /> Remember me</label>
+          <a class="forgot-link" href="pages/forgot-password.html">Forgot Password?</a>
+        </div>
+        <button type="submit" class="btn-primary">Login</button>
+        <button type="reset" class="btn-reset">Reset</button>
+        <p class="register">Not a member? <a href="pages/signup.html">Register here!</a></p>
+        <p class="register">Admin? <a href="pages/admin-login.html">Login here!</a></p>
+      </form>
     </div>
-</footer>
+  </div>
 
-
-    <script>
-        function signIn(e) {
-            e.preventDefault();
-            let email = document.getElementById("email").value,
-                pwd = document.getElementById("pwd").value;
-            let formData = JSON.parse(localStorage.getItem("formData")) || [];
-            localStorage.setItem("email", JSON.stringify(email));
-            console.log(email);
-            let exist =
-                formData.length &&
-                JSON.parse(localStorage.getItem("formData")).some(
-                    (data) =>
-                        data.email.toLowerCase() == email && data.pwd.toLowerCase() == pwd
-                );
-            if (!exist) {
-                alert("Please Enter Registered E-mail Id.");
-            } else {
-                location.href = "/after-login/After-login.html";
-            }
-        }
-    </script>
+  <script src="css/app.js"></script>
+  <script>
+    function signIn(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const pwd   = document.getElementById('pwd').value;
+      const formData = JSON.parse(localStorage.getItem('formData')) || [];
+      localStorage.setItem('email', JSON.stringify(email));
+      const exist = formData.some(d => d.email === email.toLowerCase() && d.pwd === pwd.toLowerCase());
+      if (!exist) {
+        showToast('Invalid email or password.', 'error');
+      } else {
+        showToast('Login successful! Redirecting...', 'success');
+        setTimeout(() => location.href = 'pages/voting.html', 1000);
+      }
+    }
+  </script>
 </body>
 </html>

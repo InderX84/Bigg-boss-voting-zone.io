@@ -1,0 +1,8 @@
+.content { max-width: 800px; margin: 50px auto; padding: 0 30px; display: flex; flex-direction: column; gap: 30px; }
+
+.section { background: rgba(10,10,10,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 30px 36px; backdrop-filter: blur(10px); }
+.section h2 { font-size: 20px; font-weight: 700; color: white; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(232,42,42,0.4); }
+.section p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.9; }
+.section ol { padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+.section ol li { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.section strong { color: #e82a2a; }

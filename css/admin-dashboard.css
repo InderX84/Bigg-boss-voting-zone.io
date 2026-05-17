@@ -1,0 +1,11 @@
+.dashboard { display: flex; justify-content: center; gap: 30px; padding: 50px 40px; flex-wrap: wrap; }
+
+.card { display: flex; align-items: center; gap: 20px; background: rgba(10,10,10,0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px 32px; width: 340px; text-decoration: none; color: white; backdrop-filter: blur(10px); transition: border-color 0.2s, transform 0.2s; }
+.card:hover { border-color: #e82a2a; transform: translateY(-4px); }
+
+.card-icon { font-size: 36px; background: rgba(232,42,42,0.15); border: 1px solid rgba(232,42,42,0.3); border-radius: 12px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.card-body h2 { font-size: 18px; font-weight: 700; color: white; margin-bottom: 6px; }
+.card-body p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+.card-arrow { margin-left: auto; font-size: 20px; color: rgba(255,255,255,0.3); transition: color 0.2s, transform 0.2s; }
+.card:hover .card-arrow { color: #e82a2a; transform: translateX(4px); }

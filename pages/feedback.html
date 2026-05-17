@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="split">
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <div class="split-container">
+    <div class="split-left">
+      <div class="logo"><span class="logo-icon">&#9733;</span><h1>Bigg Boss</h1><span class="logo-sub">VOTING ZONE</span></div>
+      <p class="detail">We value your feedback. Share your thoughts and help us improve the <strong>Voting Zone</strong> experience for everyone.</p>
+    </div>
+    <div class="split-right">
+      <form class="feedback-form" onsubmit="submitFeedback(event)">
+        <h2 class="form-title">Feedback</h2>
+        <p class="form-sub">We'd love to hear from you</p>
+        <div class="input-group"><label for="name">Full Name</label><input type="text" id="name" placeholder="Enter your name" required /></div>
+        <div class="input-group"><label for="email">Email Address</label><input type="email" id="email" placeholder="Enter your email" required /></div>
+        <div class="input-group"><label for="message">Message</label><textarea id="message" rows="5" placeholder="Write your feedback here..." required></textarea></div>
+        <button type="submit" class="btn-primary">Submit Feedback</button>
+        <a class="back-btn" href="voting.html">&#8592; Go Back</a>
+      </form>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    function submitFeedback(e) {
+      e.preventDefault();
+      showToast('Thank you for your feedback!', 'success');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Results</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/results.css">
+</head>
+<body>
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <nav>
+    <div class="nav-brand"><span class="nav-star">&#9733;</span> Bigg Boss <span class="nav-sub">ADMIN</span></div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul>
+      <li><a href="admin-dashboard.html">Dashboard</a></li>
+      <li><a href="voting.html">Voting Page</a></li>
+      <li><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="results-banner">
+    <div class="hero-badge">&#128202; Live Results</div>
+    <h1>Grand Finale Results</h1>
+    <p>Real-time vote standings. Publish when ready.</p>
+    <div class="result-stats">
+      <div class="r-stat"><span id="total-votes">0</span><label>Total Votes</label></div>
+      <div class="r-stat"><span id="leader-name">—</span><label>Current Leader</label></div>
+      <div class="r-stat"><span id="leader-pct">0%</span><label>Top Vote %</label></div>
+      <div class="r-stat"><span id="publish-status">Unpublished</span><label>Status</label></div>
+    </div>
+  </div>
+
+  <!-- Podium -->
+  <div class="podium-wrap">
+    <h2>&#127942; Top 3 Contestants</h2>
+    <div class="podium" id="podium"></div>
+  </div>
+
+  <!-- Full Rankings -->
+  <div class="rankings-wrap">
+    <h2>&#128202; Full Rankings</h2>
+    <div id="rankings"></div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-primary" id="publish-btn" onclick="publishResults()">&#8593; Publish Results</button>
+    <a href="admin-dashboard.html" class="btn-ghost">&#8592; Back to Dashboard</a>
+  </div>
+
+  <div id="logout-modal">
+    <div class="logout-box">
+      <div class="logout-icon">&#128274;</div>
+      <h2>Logout?</h2>
+      <p>Are you sure you want to logout from the admin panel?</p>
+      <div class="logout-actions">
+        <button class="btn-cancel" id="logout-cancel">Cancel</button>
+        <button class="btn-confirm" id="logout-confirm">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    const allContestants = ['Shalin Bhanot','Shiv Thakare','Archana Gautam','Mc Stan','Priyanka Choudhary'];
+    const photos = {
+      'Shalin Bhanot':     'https://pbs.twimg.com/media/FkkhnEyXEAMDnlh.jpg:large',
+      'Mc Stan':           'https://pbs.twimg.com/media/Fe24ML3aMAE5Eqw.jpg',
+      'Shiv Thakare':      'https://pbs.twimg.com/media/FjSWxB_WQAAL2rx.jpg:large',
+      'Priyanka Choudhary':'https://pbs.twimg.com/media/FkkhY4tXEAAWHR7.jpg',
+      'Archana Gautam':    'https://pbs.twimg.com/media/FlDKlmqWYAAF2Ni.jpg:large'
+    };
+    const medals      = ['🥇','🥈','🥉'];
+    const podiumClass = ['first','second','third'];
+
+    function render() {
+      const votes  = JSON.parse(localStorage.getItem('votes')) || {};
+      const total  = Object.values(votes).reduce((a, b) => a + b, 0) || 1;
+      const sorted = allContestants
+        .map(name => ({ name, count: votes[name] || 0, pct: Math.round(((votes[name] || 0) / total) * 100) }))
+        .sort((a, b) => b.count - a.count);
+
+      const realTotal = Object.values(votes).reduce((a, b) => a + b, 0);
+
+      // Stats
+      document.getElementById('total-votes').textContent = realTotal;
+      if (sorted[0]) {
+        document.getElementById('leader-name').textContent = sorted[0].name.split(' ')[0];
+        document.getElementById('leader-pct').textContent  = realTotal ? sorted[0].pct + '%' : '0%';
+      }
+      const published = localStorage.getItem('resultsPublished') === 'true';
+      const statusEl  = document.getElementById('publish-status');
+      statusEl.textContent = published ? 'Published ✓' : 'Unpublished';
+      statusEl.style.color = published ? '#22c55e' : 'rgba(255,255,255,0.7)';
+      if (published) {
+        document.getElementById('publish-btn').textContent = '✓ Results Published';
+        document.getElementById('publish-btn').disabled = true;
+        document.getElementById('publish-btn').style.background = 'rgba(34,197,94,0.2)';
+        document.getElementById('publish-btn').style.color = '#22c55e';
+        document.getElementById('publish-btn').style.border = '1px solid rgba(34,197,94,0.3)';
+      }
+
+      // Podium
+      document.getElementById('podium').innerHTML = sorted.slice(0, 3).map((c, i) => `
+        <div class="podium-card ${podiumClass[i]}">
+          <div class="podium-medal">${medals[i]}</div>
+          <img src="${photos[c.name] || ''}" alt="${c.name}">
+          <h3>${c.name}</h3>
+          <div class="podium-pct">${realTotal ? c.pct + '%' : '0%'}</div>
+          <div class="podium-votes">${c.count} votes</div>
+        </div>`).join('');
+
+      // Rankings
+      document.getElementById('rankings').innerHTML = sorted.map((c, i) => `
+        <div class="rank-row ${i === 0 ? 'top' : ''}">
+          <div class="rank-num">${i + 1}</div>
+          <img src="${photos[c.name] || ''}" alt="${c.name}">
+          <div class="rank-info">
+            <h3>${c.name}</h3>
+            <div class="rank-bar"><div class="rank-bar-fill" style="width:${realTotal ? c.pct : 0}%"></div></div>
+          </div>
+          <div class="rank-right">
+            <span class="rank-pct">${realTotal ? c.pct + '%' : '0%'}</span>
+            <span class="rank-votes">${c.count} votes</span>
+          </div>
+        </div>`).join('');
+    }
+
+    function publishResults() {
+      const votes = JSON.parse(localStorage.getItem('votes')) || {};
+      if (!Object.values(votes).reduce((a, b) => a + b, 0)) {
+        showToast('No votes recorded yet.', 'error'); return;
+      }
+      localStorage.setItem('resultsPublished', 'true');
+      showToast('Results published! Users can now view the results.', 'success');
+      render();
+    }
+
+    render();
+    initLogout('../index.html');
+  </script>
+</body>
+</html>

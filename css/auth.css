@@ -1,0 +1,27 @@
+.login-form, .signup-form, .feedback-form, .contestant-form {
+  width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 16px;
+}
+
+.input-row { display: flex; gap: 12px; }
+.input-row .input-group { flex: 1; }
+
+.subcontainer { display: flex; align-items: center; justify-content: space-between; font-size: 13px; }
+.remember { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,0.7); cursor: pointer; }
+
+.forgot-link { color: #e82a2a; text-decoration: none; font-size: 13px; }
+.forgot-link:hover { text-decoration: underline; }
+
+.btn-reset {
+  width: 100%; padding: 13px; background: transparent; color: rgba(255,255,255,0.6);
+  border: 1.5px solid rgba(255,255,255,0.2); border-radius: 8px; font-size: 15px;
+  font-family: 'Poppins', sans-serif; cursor: pointer; transition: all 0.2s;
+}
+.btn-reset:hover { border-color: white; color: white; }
+
+.admin-badge { display: inline-block; background: rgba(232,42,42,0.15); border: 1px solid rgba(232,42,42,0.4); color: #e82a2a; font-size: 12px; font-weight: 600; letter-spacing: 1px; padding: 5px 14px; border-radius: 20px; text-transform: uppercase; width: fit-content; }
+
+/* Photo upload */
+.photo-upload { position: relative; width: 110px; height: 110px; border-radius: 50%; overflow: hidden; cursor: pointer; border: 3px solid rgba(232,42,42,0.5); align-self: center; }
+.photo-upload img { width: 100%; height: 100%; object-fit: cover; }
+.photo-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: white; opacity: 0; transition: opacity 0.2s; }
+.photo-upload:hover .photo-overlay { opacity: 1; }

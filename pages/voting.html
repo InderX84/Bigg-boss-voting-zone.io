@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voting Zone</title>
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/voting.css">
+</head>
+<body>
+  <div id="loader"><div class="loader-icon">&#9733;</div><h1>Bigg Boss</h1><span>VOTING ZONE</span><div class="loader-bar"><div class="loader-bar-fill"></div></div></div>
+
+  <nav>
+    <div class="nav-brand"><span class="nav-star">&#9733;</span> Bigg Boss <span class="nav-sub">VOTING ZONE</span></div>
+    <div class="nav-toggle"><span></span><span></span><span></span></div>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+      <li><a href="membership.html">Membership</a></li>
+      <li><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Banner -->
+  <div class="banner">
+    <div class="banner-content">
+      <span class="banner-badge">&#128247; Live Voting Open</span>
+      <h1>Grand Finale</h1>
+      <p>Cast your vote and decide who wins Bigg Boss this season. Every vote counts!</p>
+      <div class="banner-stats">
+        <div class="stat"><span id="total-votes">0</span><label>Total Votes</label></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span>5</span><label>Contestants</label></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span id="voted-status">Not Voted</span><label>Your Status</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contestants -->
+  <div class="section-title">
+    <h2>Vote for Your Favourite</h2>
+    <p>You can only vote once — choose wisely!</p>
+  </div>
+
+  <div class="contestants">
+
+    <div class="c-card">
+      <img src="https://pbs.twimg.com/media/FkkhnEyXEAMDnlh.jpg:large" alt="Shalin Bhanot">
+      <div class="c-info">
+        <div class="c-top">
+          <div>
+            <h2>Shalin Bhanot</h2>
+            <p>Indian actor who started his career as a contestant in Roadies 2 and has since acted in various serials.</p>
+          </div>
+          <button class="vote-btn" onclick="vote(this)">Vote</button>
+        </div>
+        <div class="c-bar-wrap">
+          <div class="c-bar"><div class="c-bar-fill" data-name="Shalin Bhanot"></div></div>
+          <span class="c-pct" data-name="Shalin Bhanot">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <img src="https://pbs.twimg.com/media/Fe24ML3aMAE5Eqw.jpg" alt="Mc Stan">
+      <div class="c-info">
+        <div class="c-top">
+          <div>
+            <h2>Mc Stan</h2>
+            <p>Well-known rapper who has dominated the internet with his incredible rhymes and popular tunes.</p>
+          </div>
+          <button class="vote-btn" onclick="vote(this)">Vote</button>
+        </div>
+        <div class="c-bar-wrap">
+          <div class="c-bar"><div class="c-bar-fill" data-name="Mc Stan"></div></div>
+          <span class="c-pct" data-name="Mc Stan">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <img src="https://pbs.twimg.com/media/FjSWxB_WQAAL2rx.jpg:large" alt="Shiv Thakare">
+      <div class="c-info">
+        <div class="c-top">
+          <div>
+            <h2>Shiv Thakare</h2>
+            <p>Indian television personality known for Roadies Rising, Bigg Boss Marathi 2 and Bigg Boss 16.</p>
+          </div>
+          <button class="vote-btn" onclick="vote(this)">Vote</button>
+        </div>
+        <div class="c-bar-wrap">
+          <div class="c-bar"><div class="c-bar-fill" data-name="Shiv Thakare"></div></div>
+          <span class="c-pct" data-name="Shiv Thakare">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <img src="https://pbs.twimg.com/media/FkkhY4tXEAAWHR7.jpg" alt="Priyanka Choudhary">
+      <div class="c-info">
+        <div class="c-top">
+          <div>
+            <h2>Priyanka Choudhary</h2>
+            <p>Popular actress who rose to fame with her performance as Tejo in the show Udaariyaan.</p>
+          </div>
+          <button class="vote-btn" onclick="vote(this)">Vote</button>
+        </div>
+        <div class="c-bar-wrap">
+          <div class="c-bar"><div class="c-bar-fill" data-name="Priyanka Choudhary"></div></div>
+          <span class="c-pct" data-name="Priyanka Choudhary">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <img src="https://pbs.twimg.com/media/FlDKlmqWYAAF2Ni.jpg:large" alt="Archana Gautam">
+      <div class="c-info">
+        <div class="c-top">
+          <div>
+            <h2>Archana Gautam</h2>
+            <p>Indian politician, actress and model who won Miss Bikini India 2018 and represented India at Miss Cosmos World 2018.</p>
+          </div>
+          <button class="vote-btn" onclick="vote(this)">Vote</button>
+        </div>
+        <div class="c-bar-wrap">
+          <div class="c-bar"><div class="c-bar-fill" data-name="Archana Gautam"></div></div>
+          <span class="c-pct" data-name="Archana Gautam">0%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="logout-modal">
+    <div class="logout-box">
+      <div class="logout-icon">&#128274;</div>
+      <h2>Logout?</h2>
+      <p>Are you sure you want to logout?</p>
+      <div class="logout-actions">
+        <button class="btn-cancel" id="logout-cancel">Cancel</button>
+        <button class="btn-confirm" id="logout-confirm">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../css/app.js"></script>
+  <script>
+    const userEmail = JSON.parse(localStorage.getItem('email')) || 'guest';
+    const votedKey  = 'voted_' + userEmail;
+
+    function updateStats() {
+      const votes = JSON.parse(localStorage.getItem('votes')) || {};
+      const total = Object.values(votes).reduce((a, b) => a + b, 0);
+      document.getElementById('total-votes').textContent = total;
+
+      const votedFor = localStorage.getItem(votedKey);
+      document.getElementById('voted-status').textContent = votedFor ? '✓ Voted' : 'Not Voted';
+      if (votedFor) document.getElementById('voted-status').style.color = '#22c55e';
+
+      document.querySelectorAll('.c-bar-fill').forEach(bar => {
+        const name  = bar.dataset.name;
+        const count = votes[name] || 0;
+        const pct   = total ? Math.round((count / total) * 100) : 0;
+        bar.style.width = pct + '%';
+        const pctEl = document.querySelector(`.c-pct[data-name="${name}"]`);
+        if (pctEl) pctEl.textContent = pct + '%';
+      });
+    }
+
+    function restoreVoteState() {
+      const votedFor = localStorage.getItem(votedKey);
+      if (!votedFor) return;
+      document.querySelectorAll('.c-card').forEach(card => {
+        const name = card.querySelector('h2').textContent;
+        const btn  = card.querySelector('.vote-btn');
+        if (name === votedFor) { btn.textContent = '✓ Voted'; btn.classList.add('voted'); }
+        btn.disabled = true;
+      });
+    }
+
+    function vote(btn) {
+      if (localStorage.getItem(votedKey)) { showToast('You have already voted!', 'error'); return; }
+      const name = btn.closest('.c-card').querySelector('h2').textContent;
+      let votes = JSON.parse(localStorage.getItem('votes')) || {};
+      votes[name] = (votes[name] || 0) + 1;
+      localStorage.setItem('votes', JSON.stringify(votes));
+      localStorage.setItem(votedKey, name);
+      document.querySelectorAll('.vote-btn').forEach(b => b.disabled = true);
+      btn.textContent = '✓ Voted';
+      btn.classList.add('voted');
+      showToast('Vote cast for ' + name + '!', 'success');
+      updateStats();
+    }
+
+    restoreVoteState();
+    updateStats();
+    initLogout('../index.html');
+  </script>
+</body>
+</html>
